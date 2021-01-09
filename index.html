@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>S+SPRR2020 - ALPose</title>
+
+	<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+	<meta name="author" content="Hakim El Hattab">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="reveal.js/dist/reset.css">
+	<link rel="stylesheet" href="reveal.js/dist/reveal.css">
+	<link rel="stylesheet" href="reveal.js/dist/theme/black.css" id="theme">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<!--Title-->
+				<section>
+					<a href="https://revealjs.com">
+						<img src="files/lut-logo-dark.png" alt="reveal.js logo"
+							style="height: 180px; margin: 0 auto 4rem auto; background: transparent;" class="demo-logo">
+					</a>
+					<h3>A Practical Hybrid Active Learning Approach for Human Pose Estimation</h3>
+					<p>
+						<small><a href="https://www.linkedin.com/in/kaplansinan/">Sinan Kaplan</a>, <a
+								href="https://fi.linkedin.com/in/qitvision">Joni Juvonen</a>
+							and <a href="http://personal.lut.fi/users/lasse.lensu/">Lasse
+								Lensu</a></small>
+					</p>
+				</section>
+				<!--Introduction -->
+				<section>
+					<h3>Human Pose Estimation</h3>
+					<ul>
+						<li class="fragment">
+							Estimate certain keypoints on human body.
+						</li>
+						<img class="fragment" src="files/coco_points.png" />
+					</ul>
+				</section>
+
+				<!-- Problem and Solution -->
+				<section>
+					<section>
+						<h3>Problem</h3>
+						<ul>
+							<li class="fragment">
+								Keypoint annotation is <strong>costly</strong>.
+							</li>
+							<li class="fragment">
+								Amount of data required for the task is <strong>large</strong>.
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Solution</h3>
+						<ul>
+							<li class="fragment">
+								Apply Active Learning (AL) to train a model iteratively.
+							</li>
+							<center><img class="fragment" src="files/active_learning_loop.png" /></center>
+						</ul>
+					</section>
+					<section>
+						<h3>Aim of The Study</h3>
+						<ul>
+							<li class="fragment">
+								Apply Active Learning for Human Pose Estimation in an online environment.
+							</li>
+							<li class="fragment">
+								Propose a cost-effective hybrid sampling strategy: uncertainty and diversity.
+							</li>
+						</ul>
+					</section>
+				</section>
+
+				<!-- Methods -->
+				<section>
+					<section>
+						<h3>An Overview of The Proposed Method </h3>
+						<ul>
+							<li class="fragment">
+								A hybrid approach with uncertainty and diversity sampling.
+							</li>
+							<img class="fragment" src="files/AL_procedure_v2.png" />
+						</ul>
+					</section>
+					<section>
+						<h3>Uncertainty Sampling Module</h3>
+						<ul>
+							<li class="fragment">
+								Model-based uncertainty sampling.
+							</li>
+							<img class="fragment" src="files/uncertainty.png" />
+
+						</ul>
+					</section>
+					<section>
+						<h3>Feature Extraction Module</h3>
+						<ul>
+							<li class="fragment">
+								Taking advantage of Transfer Learning.
+							</li>
+							<img class="fragment" src="files/feature_extraction.png" />
+						</ul>
+					</section>
+					<section>
+						<h3>Diversity Sampling Module</h3>
+						<ul>
+							<li class="fragment">
+								Use approximate nearest neighbors to reduce sampling cost.
+							</li>
+							<img class="fragment" src="files/diversity.png" />
+						</ul>
+					</section>
+					<section>
+						<h3>Baseline Method and Evaluation Metric</h3>
+						<ul>
+							<li class="fragment">
+								Random Sampling as a baseline method.
+							</li>
+							<li class="fragment">
+								Person count accuracy:
+								<ul>
+									<center>
+										\[\begin{aligned}
+										\texttt{PC_ACC} = \dfrac{\texttt{Number of detected person}}{\texttt{Total number of person}} \\
+										\end{aligned} \]
+									</center>
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</section>
+
+				<!-- Experiments -->
+				<section>
+					<section>
+						<h3>Experiments </h3>
+						<h5 class="fragment">Data </h3>
+							<ul>
+								<li class="fragment">
+									Provided by <a href="https://www.versovision.com/en">PintaWorks Oy</a>.
+								</li>
+								<li class="fragment"> Environment dependent variations in the data:
+									<ul>
+										<li>camera angle, lightning.</li>
+									</ul>
+								</li>
+								<li class="fragment">
+									Consists of grayscale images with 368x368 size.
+								</li>
+								<li class="fragment"> Applied augmentations:
+									<ul>
+										<li>rotation, translation, scaling, blurring, brightness and contrast</li>
+									</ul>
+								</li>
+
+							</ul>
+					</section>
+					<section>
+						<h3>Model</h3>
+						<ul>
+							<li class="fragment">
+								Openpose Model from <a href="https://github.com/tensorlayer/hyperpose">Tensorlayer</a> repo.
+							</li>
+							<center><img class="fragment" width="90%" src="files/openpose.png" /></center>
+							<li class="fragment">
+								Approximate Nearest Neighbor Libraries:
+								<ul>
+									<li><a href="https://github.com/mariusmuja/flann">FLANN </a>and <a href="https://github.com/spotify/annoy">Annoy</a></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Training Details</h3>
+						<ul>
+							<li class="fragment">
+								Tensorflow stack is used.
+							</li>
+							<li class="fragment">
+								Early Stopping on validation set.
+							</li>
+							<li class="fragment">
+								5 training iterations conducted for each method (AL and the baseline method):
+								<ul>
+									<li>At each iteration 1K samples are selected by the proposed AL strategy and annotated by Oracle(human).</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Hardware:
+								<ul>
+									<li>NVIDIA GeForce GTX 1060 6GB</li>
+									<li>CUDA 10.1 and cuDNN 7.6</li>
+								</ul>
+							</li>
+
+						</ul>
+					</section>
+					<section>
+						<h3>Validation of AL Strategy</h3>
+						<ul>
+							<li class="fragment">
+								Samples with high and low heatmaps (confidence scores).
+							</li>
+							<center><img width="50%" class="fragment" src="files/heatFigICML.png" /></center>
+							
+						</ul>
+					</section>
+					<section>
+						<h3>Validation of AL Strategy</h3>
+						<ul>
+							<li>
+								Selected samples to be annotated from COCO-val.
+							</li>
+							<center><img data-transition="fade-in" width="80%" class="fragment" src="files/COCOValDiverse.png" /></center>
+							</ul>
+					</section>
+				</section>
+
+				<!-- Test Results-->
+				<section>
+					<section>
+						<h3>Tests </h3>
+							<ul>
+								<li class="fragment">
+									Comparison of Methods on Test Set
+								</li>
+								<img class="fragment" src="files/AL_new2020.png" />
+							</ul>
+					</section>
+					<section>
+						<h5>Test Time Augmentation Tests</h5>
+						<ul>
+							<center><img class="fragment" width="80%"src="files/AL20201109.png" /></center>
+
+						</ul>
+					</section>
+				</section>
+
+				<!-- Discussion-->
+				<section>
+						<section>
+							<h3>DISCUSSION </h3>
+								<ul>
+									<li class="fragment">
+									Pros:
+									</li>
+									<ul>
+										<li class="fragment">
+											Proposed method improves pose model significantly
+										</li>
+										<li class="fragment">
+											The method is able to select diver samples
+										</li>
+									</ul>
+									
+									<li class="fragment">
+										Cons:
+									</li>
+									<ul>
+										<li class="fragment">
+											Adversarial samples that resemble a human shape
+										</li>
+										<li class="fragment">
+											Person size (small) and occlusions for pose model
+										</li>
+									</ul>
+									<li class="fragment">
+										One should select augmentations based on the environment where the model operates.
+									</li>
+									
+								</ul>
+						</section>
+						<section>
+							<h5>FUTURE WORK</h5>
+							<ul>
+								<li class="fragment">
+									Improve uncertainty sampling module:
+									<ul>
+										<li class="fragment">
+											Eliminate adversarial samples
+										</li>
+										<li class="fragment">
+											Proposal: use average of Test Time Augmentations
+										</li>
+									</ul>
+								</li>
+								<li class="fragment">
+									Improve Diversity Sampling Module:
+									<ul>
+										<li class="fragment">
+											Hierarchical clustering
+										</li>
+										<li class="fragment">
+											Combine local features and visual features- possibly image hashes.
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</section>
+				</section>
+
+			<!-- Conclusion-->
+			<section>
+				<a href="https://revealjs.com">
+					<img src="files/lut-logo-dark.png" alt="reveal.js logo"
+						style="height: 180px; margin: 0 auto 4rem auto; background: transparent;" class="demo-logo">
+				</a>
+				<p>Thank you!</p>
+				<p class="sub"><em><a href="https://www.linkedin.com/in/kaplansinan/">Sinan Kaplan</a></em></p>
+				<p class="sub">sinan.kaplan@student.lut.fi</p>
+				<p class="sub">sinan.kaplan@pintaworks.fi</p>
+			</section>
+
+			</div>
+			<!--slides-->
+		</div>
+
+		<script src="reveal.js/dist/reveal.js"></script>
+		<script src="reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="reveal.js/plugin/notes/notes.js"></script>
+		<script src="reveal.js/plugin/search/search.js"></script>
+		<script src="reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="reveal.js/plugin/math/math.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+				math: {
+				mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				// pass other options into `MathJax.Hub.Config()`
+				TeX: { Macros: { RR: "{\\bf R}" } }
+				},
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath]
+			});
+
+		</script>
+
+</body>
+
+</html>
