@@ -79,10 +79,10 @@
 						</ul>
 					</section>
 					<section>
-						<h3>Aim of The Study</h3>
+						<h3>AIMS OF THE STUDY</h3>
 						<ul>
 							<li class="fragment">
-								Apply Active Learning for Human Pose Estimation in an online environment.
+								Apply Active Learning for Human Pose Estimation in an <span class="fragment highlight-red">online environment.</span>
 							</li>
 							<li class="fragment">
 								Propose a cost-effective hybrid sampling strategy: uncertainty and diversity.
@@ -100,6 +100,24 @@
 								A hybrid approach with uncertainty and diversity sampling.
 							</li>
 							<img class="fragment" src="files/AL_procedure_v2.png" />
+						</ul>
+                    </section>
+                    <section>
+						<h3>Baseline Method and Evaluation Metric</h3>
+						<ul>
+							<li class="fragment">
+								Random Sampling as a baseline method.
+							</li>
+							<li class="fragment">
+								Person count accuracy:
+								<ul>
+									<center>
+										\[\begin{aligned}
+										\texttt{PC_ACC} = \dfrac{\texttt{Number of detected person}}{\texttt{Total number of person}} \\
+										\end{aligned} \]
+									</center>
+								</ul>
+							</li>
 						</ul>
 					</section>
 					<section>
@@ -128,24 +146,6 @@
 								Use approximate nearest neighbors to reduce sampling cost.
 							</li>
 							<img class="fragment" src="files/diversity.png" />
-						</ul>
-					</section>
-					<section>
-						<h3>Baseline Method and Evaluation Metric</h3>
-						<ul>
-							<li class="fragment">
-								Random Sampling as a baseline method.
-							</li>
-							<li class="fragment">
-								Person count accuracy:
-								<ul>
-									<center>
-										\[\begin{aligned}
-										\texttt{PC_ACC} = \dfrac{\texttt{Number of detected person}}{\texttt{Total number of person}} \\
-										\end{aligned} \]
-									</center>
-								</ul>
-							</li>
 						</ul>
 					</section>
 				</section>
@@ -197,9 +197,6 @@
 								Tensorflow stack is used.
 							</li>
 							<li class="fragment">
-								Early Stopping on validation set.
-							</li>
-							<li class="fragment">
 								5 training iterations conducted for each method (AL and the baseline method):
 								<ul>
 									<li>At each iteration 1K samples are selected by the proposed AL strategy and annotated by Oracle(human).</li>
@@ -242,13 +239,13 @@
 						<h3>Tests </h3>
 							<ul>
 								<li class="fragment">
-									Comparison of Methods on Test Set
+									The Comparison of Methods on Test Set
 								</li>
 								<img class="fragment" src="files/AL_new2020.png" />
 							</ul>
 					</section>
 					<section>
-						<h5>Test Time Augmentation Tests</h5>
+						<h5>Test Time Augmentation(TTA) Tests</h5>
 						<ul>
 							<center><img class="fragment" width="80%"src="files/AL20201109.png" /></center>
 
@@ -266,10 +263,10 @@
 									</li>
 									<ul>
 										<li class="fragment">
-											Proposed method improves pose model significantly
+											The proposed method improves the pose model significantly.
 										</li>
 										<li class="fragment">
-											The method is able to select diver samples
+											The AL method is able to select diverse samples.
 										</li>
 									</ul>
 									
@@ -278,15 +275,15 @@
 									</li>
 									<ul>
 										<li class="fragment">
-											Adversarial samples that resemble a human shape
+											Adversarial samples in which some objects resemble a human shape.
 										</li>
 										<li class="fragment">
-											Person size (small) and occlusions for pose model
+											Person size (small) and occlusions for pose model.
 										</li>
 									</ul>
-									<li class="fragment">
+									<!--<li class="fragment">
 										One should select augmentations based on the environment where the model operates.
-									</li>
+									</li>-->
 									
 								</ul>
 						</section>
